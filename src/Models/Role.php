@@ -26,6 +26,11 @@ class Role extends Model
         return [
             'slug' => [
                 'source' => 'name',
+                'onUpdate' => false,
+                'separator' => '-',
+                'method'=>null,
+                'maxLength'=>null,
+                'maxLengthKeepWords'=>true
             ],
         ];
     }
@@ -35,14 +40,14 @@ class Role extends Model
         return $this->hasMany(RoleAssignment::class);
     }
 
-    public function permissions(): BelongsToMany
-    {
-        return $this->belongsToMany(Permission::class, 'role_permissions');
-    }
-
     public function hasPermission(string $permissionSlug): bool
     {
         return $this->permissions()->where('slug', $permissionSlug)->exists();
+    }
+
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class, 'role_permissions');
     }
 
     public function grantPermission(string $permissionSlug): void
