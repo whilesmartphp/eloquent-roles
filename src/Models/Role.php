@@ -28,9 +28,9 @@ class Role extends Model
                 'source' => 'name',
                 'onUpdate' => false,
                 'separator' => '-',
-                'method'=>null,
-                'maxLength'=>null,
-                'maxLengthKeepWords'=>true
+                'method' => null,
+                'maxLength' => null,
+                'maxLengthKeepWords' => true,
             ],
         ];
     }

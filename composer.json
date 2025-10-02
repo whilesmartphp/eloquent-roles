@@ -1,42 +1,58 @@
 {
-    "name": "whilesmart/eloquent-roles",
-    "description": "Flexible roles and permissions package for Laravel applications",
-    "keywords": ["laravel", "roles", "permissions", "php", "package", "rbac"],
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Whilesmart Team"
-        }
+  "name": "whilesmart/eloquent-roles",
+  "description": "Flexible roles and permissions package for Laravel applications",
+  "keywords": [
+    "laravel",
+    "roles",
+    "permissions",
+    "php",
+    "package",
+    "rbac"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Whilesmart Team"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "laravel/framework": "^11.0|^12.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^9.0|^10.0",
+    "phpunit/phpunit": "^10.0|^11.0",
+    "laravel/pint": "^1.25"
+  },
+  "autoload": {
+    "psr-4": {
+      "Whilesmart\\Roles\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Whilesmart\\Roles\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Whilesmart\\Roles\\RolesServiceProvider"
+      ]
+    }
+  },
+  "scripts": {
+    "pint": [
+      "./vendor/bin/pint"
     ],
-    "require": {
-        "php": "^8.2",
-        "laravel/framework": "^11.0|^12.0"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^9.0|^10.0",
-        "phpunit/phpunit": "^10.0|^11.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Whilesmart\\Roles\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Whilesmart\\Roles\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Whilesmart\\Roles\\RolesServiceProvider"
-            ]
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    "pint:test": [
+      "./vendor/bin/pint --test"
+    ]
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
