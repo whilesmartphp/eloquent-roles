@@ -17,4 +17,4 @@ jobs:
         uses: whilesmart/workflows/package/release@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          package: whilesmart/eloquent-organizations
+          package: whilesmart/eloquent-roles
