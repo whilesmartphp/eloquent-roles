@@ -8,22 +8,22 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('role_assignments', function (Blueprint $table) {
+        Schema::create('abilities', function (Blueprint $table) {
             $table->id();
+            $table->string('action');
+            $table->nullableMorphs('subject');
             $table->morphs('assignable');
-            $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->nullableMorphs('context');
+            $table->boolean('allowed')->default(true);
+            $table->json('conditions')->nullable();
             $table->timestamps();
 
-            $table->unique(
-                ['assignable_type', 'assignable_id', 'role_id', 'context_type', 'context_id'],
-                'role_assignment_unique'
-            );
+            $table->index('action');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('role_assignments');
+        Schema::dropIfExists('abilities');
     }
 };
