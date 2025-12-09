@@ -1,4 +1,5 @@
-.vscode/
-.idea/
 vendor/
-.DStore
+**/.DS_Store
+.idea/
+.vscode/
+.phpunit.result.cache
