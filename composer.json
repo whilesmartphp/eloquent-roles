@@ -1,7 +1,7 @@
 {
   "name": "whilesmart/eloquent-roles",
   "description": "Flexible roles and permissions package for Laravel applications",
-  "package-version": "1.0.0",
+  "package-version": "1.0.1",
   "keywords": [
     "laravel",
     "roles",
