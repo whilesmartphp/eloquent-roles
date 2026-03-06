@@ -2,7 +2,13 @@
 
 namespace Whilesmart\Roles;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Whilesmart\Roles\Commands\AssignRoleCommand;
+use Whilesmart\Roles\Commands\CreatePermissionCommand;
+use Whilesmart\Roles\Commands\CreateRoleCommand;
+use Whilesmart\Roles\Middleware\RequirePermission;
+use Whilesmart\Roles\Middleware\RequireRole;
 use Whilesmart\Roles\Services\PermissionService;
 
 class RolesServiceProvider extends ServiceProvider
@@ -21,5 +27,19 @@ class RolesServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'roles-migrations');
+
+        // Register artisan commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateRoleCommand::class,
+                AssignRoleCommand::class,
+                CreatePermissionCommand::class,
+            ]);
+        }
+
+        // Register middleware aliases
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('role', RequireRole::class);
+        $router->aliasMiddleware('permission', RequirePermission::class);
     }
 }
