@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('role_assignments', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->morphs('assignable');
-            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('role_id')->constrained()->onDelete('cascade');
             $table->nullableMorphs('context');
             $table->timestamps();
 

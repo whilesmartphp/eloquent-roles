@@ -6,10 +6,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
 
 class Role extends Model
 {
-    use Sluggable;
+    use Sluggable, HasUuids;
 
     protected $fillable = [
         'name',
@@ -63,4 +65,7 @@ class Role extends Model
             $this->permissions()->detach($permission->id);
         }
     }
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 }

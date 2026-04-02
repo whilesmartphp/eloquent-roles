@@ -4,9 +4,13 @@ namespace Whilesmart\Roles\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Ability extends Model
 {
+
+    use HasUuids;
+
     protected $fillable = [
         'action',
         'subject_type',
@@ -18,6 +22,11 @@ class Ability extends Model
         'allowed',
         'conditions',
     ];
+
+    private function boot(): uuid
+    {
+        return $this->uuids(['id']);
+    }
 
     protected $casts = [
         'allowed' => 'boolean',
@@ -38,4 +47,8 @@ class Ability extends Model
     {
         return $this->morphTo();
     }
+
+
+    public $incrementing = false; //uuid aren't incrementing
+    protected $keyType = 'string'; //uuid are strings
 }

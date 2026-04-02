@@ -5,9 +5,13 @@ namespace Whilesmart\Roles\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
 
 class RoleAssignment extends Model
 {
+    use HasUuids;
+    
     protected $fillable = [
         'assignable_type',
         'assignable_id',
@@ -30,4 +34,7 @@ class RoleAssignment extends Model
     {
         return $this->morphTo();
     }
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 }
