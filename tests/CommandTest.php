@@ -1,8 +1,11 @@
 <?php
 
+namespace Whilesmart\Roles\Tests;
+
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\Attributes\WithMigration;
-use Orchestra\Testbench\TestCase;
+// use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
 
@@ -102,17 +105,17 @@ class CommandTest extends TestCase
             ->assertSuccessful();
     }
 
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadMigrationsFrom(workbench_path('database/migrations'));
-    }
+    // protected function defineDatabaseMigrations(): void
+    // {
+    //     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    //     $this->loadMigrationsFrom(workbench_path('database/migrations'));
+    // }
 
-    protected function getPackageProviders($app): array
-    {
-        return [
-            \Whilesmart\Roles\RolesServiceProvider::class,
-            \Cviebrock\EloquentSluggable\ServiceProvider::class,
-        ];
-    }
+    // protected function getPackageProviders($app): array
+    // {
+    //     return [
+    //         \Whilesmart\Roles\RolesServiceProvider::class,
+    //         \Cviebrock\EloquentSluggable\ServiceProvider::class,
+    //     ];
+    // }
 }

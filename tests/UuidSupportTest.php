@@ -4,7 +4,7 @@ namespace Whilesmart\Roles\Tests;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\Attributes\WithMigration;
-use Orchestra\Testbench\TestCase;
+// use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
 
@@ -79,19 +79,19 @@ class UuidSupportTest extends TestCase
         $this->assertTrue(Str::isUuid($permission->id), "The Permission ID [{$permission->id}] is not a valid UUID.");
     }
 
-    protected function defineDatabaseMigrations(): void
-    {
-        // Load package migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadMigrationsFrom(workbench_path('database/migrations'));
-    }
+    // protected function defineDatabaseMigrations(): void
+    // {
+    //     // Load package migrations
+    //     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    //     $this->loadMigrationsFrom(workbench_path('database/migrations'));
+    // }
 
-    protected function getPackageProviders($app): array
-    {
-        return [
-            \Whilesmart\Roles\RolesServiceProvider::class,
-            \Cviebrock\EloquentSluggable\ServiceProvider::class,
-        ];
-    }
+    // protected function getPackageProviders($app): array
+    // {
+    //     return [
+    //         \Whilesmart\Roles\RolesServiceProvider::class,
+    //         \Cviebrock\EloquentSluggable\ServiceProvider::class,
+    //     ];
+    // }
 
 }

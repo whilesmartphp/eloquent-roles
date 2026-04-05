@@ -11,9 +11,9 @@ return new class extends Migration
         Schema::create('abilities', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('action');
-            $table->nullableMorphs('subject');
-            $table->morphs('assignable');
-            $table->nullableMorphs('context');
+            $table->nullableUuidMorphs('subject');
+            $table->uuidMorphs('assignable');
+            $table->nullableUuidMorphs('context');
             $table->boolean('allowed')->default(true);
             $table->json('conditions')->nullable();
             $table->timestamps();
