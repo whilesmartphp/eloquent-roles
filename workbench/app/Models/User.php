@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Whilesmart\Roles\Traits\HasPermissions;
 use Whilesmart\Roles\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class User extends Authenticatable
 {
@@ -27,7 +26,7 @@ class User extends Authenticatable
 
     public function getIncrementing()
     {
-        return !config('roles.use_uuids', false);
+        return ! config('roles.use_uuids', false);
     }
 
     public function getKeyType()

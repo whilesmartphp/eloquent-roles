@@ -3,8 +3,6 @@
 namespace Workbench\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-
 
 class Workspace extends Model
 {
@@ -12,7 +10,7 @@ class Workspace extends Model
 
     public function getIncrementing()
     {
-        return !config('roles.use_uuids', false);
+        return ! config('roles.use_uuids', false);
     }
 
     public function getKeyType()

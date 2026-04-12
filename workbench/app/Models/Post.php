@@ -2,9 +2,8 @@
 
 namespace Workbench\App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-
+use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
@@ -13,7 +12,7 @@ class Post extends Model
 
     public function getIncrementing()
     {
-        return !config('roles.use_uuids', false);
+        return ! config('roles.use_uuids', false);
     }
 
     public function getKeyType()

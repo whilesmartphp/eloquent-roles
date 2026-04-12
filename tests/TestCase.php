@@ -3,26 +3,18 @@
 namespace Whilesmart\Roles\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-use Faker\Factory;
 use Workbench\App\Models\User;
-use Workbench\App\Models\Post;
-use Workbench\App\Models\Workspace;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 
 use function Orchestra\Testbench\workbench_path;
 
 class TestCase extends Orchestra
 {
-
     /**
      * Set up the environment for all tests.
      */
     protected function defineEnvironment($app)
     {
-        //default to false for standard test
+        // default to false for standard test
         $app['config']->set('roles.use_uuids', false);
 
         $app['config']->set('auth.providers.users.model', User::class);
@@ -34,9 +26,8 @@ class TestCase extends Orchestra
      */
     protected function defineDatabaseMigrations()
     {
-        //Standard Laravel users table(BigInt)
+        // Standard Laravel users table(BigInt)
         $this->loadLaravelMigrations();
-        
 
         // Load Package and Workbench migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
@@ -53,5 +44,4 @@ class TestCase extends Orchestra
             \Cviebrock\EloquentSluggable\ServiceProvider::class,
         ];
     }
-
 }

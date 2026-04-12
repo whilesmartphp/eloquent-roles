@@ -5,7 +5,6 @@ namespace Whilesmart\Roles\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Permission extends Model
 {
@@ -39,7 +38,7 @@ class Permission extends Model
     // public $incrementing = false;
     public function getIncrementing()
     {
-        return !config('roles.use_uuids', false);
+        return ! config('roles.use_uuids', false);
     }
 
     public function getKeyType()

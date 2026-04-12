@@ -42,8 +42,8 @@ class RolesServiceProvider extends ServiceProvider
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('role', RequireRole::class);
         $router->aliasMiddleware('permission', RequirePermission::class);
-        
-        if ($this->app->runningInConsole()){
+
+        if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/roles.php' => config_path('roles.php'),
             ], 'roles-config');

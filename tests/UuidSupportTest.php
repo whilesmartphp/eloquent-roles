@@ -1,4 +1,5 @@
 <?php
+
 namespace Whilesmart\Roles\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -7,8 +8,6 @@ use Orchestra\Testbench\Attributes\WithMigration;
 // use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
-
-use function Orchestra\Testbench\workbench_path;
 
 #[WithMigration]
 class UuidSupportTest extends TestCase
@@ -22,7 +21,7 @@ class UuidSupportTest extends TestCase
     {
         // FORCE UUID support for this specific test file
         $app['config']->set('roles.use_uuids', true);
-        
+
         $app['config']->set('database.default', 'testing');
         $app['config']->set('auth.providers.users.model', User::class);
     }
@@ -30,9 +29,9 @@ class UuidSupportTest extends TestCase
     /**
      * Test that creating a role generates or accepts UUID
      */
-    public function test_role_Supports_uuid_primary_key()
+    public function test_role_supports_uuid_primary_key()
     {
-        //if model generates uuid automatically
+        // if model generates uuid automatically
         $this->artisan('role:create', [
             'name' => 'Test Role',
             '--level' => 100,
@@ -40,7 +39,7 @@ class UuidSupportTest extends TestCase
 
         $role = Role::where('slug', 'test-role')->first();
 
-        //check if the ID is a valid UUId rather than an integer
+        // check if the ID is a valid UUId rather than an integer
         $this->assertTrue(Str::isUuid($role->id), "The Role ID [{$role->id}] is not a valid UUID.");
         $this->assertIsString($role->id);
     }
@@ -52,7 +51,7 @@ class UuidSupportTest extends TestCase
     {
         // 1. Create a role
         $role = Role::create(['name' => 'Editor', 'level' => 50]);
-        
+
         // 2. Mock a user with a UUID
         $uuid = (string) Str::uuid();
         $user = User::create([
@@ -90,5 +89,4 @@ class UuidSupportTest extends TestCase
 
         $this->assertTrue(Str::isUuid($permission->id), "The Permission ID [{$permission->id}] is not a valid UUID.");
     }
-
 }
