@@ -9,10 +9,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            if (config('roles.use_uuids')){
+                $table->uuid('id')->primary();
+                $table->uuid('owner_id')->nullable();
+
+            } else {
+                $table->id();
+                $table->foreignId('owner_id')->nullable();
+            }
             $table->string('title');
             $table->string('status')->default('draft');
-            $table->uuid('owner_id')->nullable();
             $table->timestamps();
         });
     }

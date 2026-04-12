@@ -14,15 +14,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Orchestra\Testbench\workbench_path;
 
-abstract class TestCase extends Orchestra
+class TestCase extends Orchestra
 {
 
-   use RefreshDatabase;
     /**
      * Set up the environment for all tests.
      */
     protected function defineEnvironment($app)
     {
+        //default to false for standard test
+        $app['config']->set('roles.use_uuids', false);
+
         $app['config']->set('auth.providers.users.model', User::class);
         $app['config']->set('database.default', 'testing');
     }
@@ -32,10 +34,11 @@ abstract class TestCase extends Orchestra
      */
     protected function defineDatabaseMigrations()
     {
-        // 1. Pivot the default Laravel User table to UUID
+        //Standard Laravel users table(BigInt)
+        $this->loadLaravelMigrations();
         
 
-        // 2. Load Package and Workbench migrations
+        // Load Package and Workbench migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadMigrationsFrom(workbench_path('database/migrations'));
     }

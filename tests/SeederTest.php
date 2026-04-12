@@ -81,7 +81,7 @@ class SeederTest extends TestCase
     // {
     //     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     //     $this->loadMigrationsFrom(workbench_path('database/migrations'));
-    // }
+    // } 
 
     // protected function getPackageProviders($app): array
     // {

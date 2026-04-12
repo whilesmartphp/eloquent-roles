@@ -16,6 +16,18 @@ class UuidSupportTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Define environment setup.
+     */
+    protected function defineEnvironment($app)
+    {
+        // FORCE UUID support for this specific test file
+        $app['config']->set('roles.use_uuids', true);
+        
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('auth.providers.users.model', User::class);
+    }
+
+    /**
      * Test that creating a role generates or accepts UUID
      */
     public function test_role_Supports_uuid_primary_key()
@@ -78,20 +90,5 @@ class UuidSupportTest extends TestCase
 
         $this->assertTrue(Str::isUuid($permission->id), "The Permission ID [{$permission->id}] is not a valid UUID.");
     }
-
-    // protected function defineDatabaseMigrations(): void
-    // {
-    //     // Load package migrations
-    //     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-    //     $this->loadMigrationsFrom(workbench_path('database/migrations'));
-    // }
-
-    // protected function getPackageProviders($app): array
-    // {
-    //     return [
-    //         \Whilesmart\Roles\RolesServiceProvider::class,
-    //         \Cviebrock\EloquentSluggable\ServiceProvider::class,
-    //     ];
-    // }
 
 }

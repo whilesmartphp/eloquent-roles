@@ -9,7 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permissions', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            if (config('roles.use_uuids')){
+                $table->uuid('id')->primary();
+            } else {
+                $table->id();
+            }
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
