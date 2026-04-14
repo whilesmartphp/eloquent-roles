@@ -23,8 +23,7 @@ class AssignRoleCommand extends Command
         $modelType = $this->argument('model_type');
         $modelId = $this->argument('model_id');
         $contextType = $this->option('context-type');
-        // $contextId = $this->option('context-id') ? (int) $this->option('context-id') : null;
-        $contextId = $this->option('context-id');
+        $contextId = $this->option('context-id') ? $this->option('context-id') : null;
 
         $role = Role::where('slug', $roleSlug)->first();
 
@@ -40,9 +39,7 @@ class AssignRoleCommand extends Command
             return self::FAILURE;
         }
 
-        // $model = $modelType::find($modelId);
-        // 3. Find the model (ensure $modelId is treated as a string)
-        $model = $modelType::whereKey($modelId)->first();
+        $model = $modelType::find($modelId);
 
         if (! $model) {
             $this->error("{$modelType} with ID {$modelId} not found.");

@@ -33,30 +33,4 @@ class Permission extends Model
     {
         return $this->belongsToMany(Role::class, 'role_permissions');
     }
-
-    // protected $keyType = 'string';
-    // public $incrementing = false;
-    public function getIncrementing()
-    {
-        return ! config('roles.use_uuids', false);
-    }
-
-    public function getKeyType()
-    {
-        return config('roles.use_uuids', false) ? 'string' : 'int';
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Automatically handle UUID generation if configured
-        if (config('roles.use_uuids', false)) {
-            static::creating(function ($model) {
-                if (empty($model->{$model->getKeyName()})) {
-                    $model->{$model->getKeyName()} = (string) \Illuminate\Support\Str::uuid();
-                }
-            });
-        }
-    }
 }

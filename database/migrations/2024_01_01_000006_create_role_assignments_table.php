@@ -9,15 +9,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('role_assignments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
             if (config('roles.use_uuids')) {
-                $table->uuid('id')->primary();
-                $table->foreignUuid('role_id')->constrained()->onDelete('cascade');
+                $table->uuidMorphs('assignable');
             } else {
-                $table->id();
-                $table->foreignId('role_id')->constrained()->onDelete('cascade');
+                $table->morphs('assignable');
             }
-            $table->uuidMorphs('assignable');
-            $table->nullableUuidMorphs('context');
+            if (config('roles.use_uuids')) {
+                $table->nullableUuidMorphs('context');
+            } else {
+                $table->nullableMorphs('context');
+            }
             $table->timestamps();
 
             $table->unique(

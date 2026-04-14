@@ -9,15 +9,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('abilities', function (Blueprint $table) {
-            if (config('roles.use_uuids')) {
-                $table->uuid('id')->primary();
-            } else {
-                $table->id();
-            }
+            $table->id();
             $table->string('action');
-            $table->nullableUuidMorphs('subject');
-            $table->uuidMorphs('assignable');
-            $table->nullableUuidMorphs('context');
+            if (config('roles.use_uuids')) {
+                $table->uuidMorphs('subject');
+                $table->uuidMorphs('assignable');
+                $table->nullableUuidMorphs('context');
+            } else {
+                $table->morphs('subject');
+                $table->morphs('assignable');
+                $table->nullableMorphs('context');
+            }
             $table->boolean('allowed')->default(true);
             $table->json('conditions')->nullable();
             $table->timestamps();

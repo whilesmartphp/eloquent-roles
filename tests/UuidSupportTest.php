@@ -3,11 +3,10 @@
 namespace Whilesmart\Roles\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Str;
 use Orchestra\Testbench\Attributes\WithMigration;
 // use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Models\Role;
-use Workbench\App\Models\User;
+use Workbench\App\Models\UuidUser;
 
 #[WithMigration]
 class UuidSupportTest extends TestCase
@@ -21,27 +20,6 @@ class UuidSupportTest extends TestCase
     {
         // FORCE UUID support for this specific test file
         $app['config']->set('roles.use_uuids', true);
-
-        $app['config']->set('database.default', 'testing');
-        $app['config']->set('auth.providers.users.model', User::class);
-    }
-
-    /**
-     * Test that creating a role generates or accepts UUID
-     */
-    public function test_role_supports_uuid_primary_key()
-    {
-        // if model generates uuid automatically
-        $this->artisan('role:create', [
-            'name' => 'Test Role',
-            '--level' => 100,
-        ])->assertSuccessful();
-
-        $role = Role::where('slug', 'test-role')->first();
-
-        // check if the ID is a valid UUId rather than an integer
-        $this->assertTrue(Str::isUuid($role->id), "The Role ID [{$role->id}] is not a valid UUID.");
-        $this->assertIsString($role->id);
     }
 
     /**
@@ -53,18 +31,18 @@ class UuidSupportTest extends TestCase
         $role = Role::create(['name' => 'Editor', 'level' => 50]);
 
         // 2. Mock a user with a UUID
-        $uuid = (string) Str::uuid();
-        $user = User::create([
-            'id' => $uuid, // Ensure your Workbench User migration supports strings
+        $user = UuidUser::create([
             'name' => 'UUID User',
             'email' => 'uuid@example.com',
             'password' => 'password',
         ]);
 
+        $uuid = $user->id; // This should be the UUID
+
         // 3. Run the assignment command
         $this->artisan('role:assign', [
             'role' => 'editor',
-            'model_type' => User::class,
+            'model_type' => UuidUser::class,
             'model_id' => $uuid,
         ])->assertSuccessful();
 
@@ -72,21 +50,7 @@ class UuidSupportTest extends TestCase
         $this->assertDatabaseHas('role_assignments', [
             'role_id' => $role->id,
             'assignable_id' => $uuid,
-            'assignable_type' => User::class,
+            'assignable_type' => UuidUser::class,
         ]);
-    }
-
-    /**
-     * Test that permissions also support and store UUIDs.
-     */
-    public function test_permission_supports_uuid()
-    {
-        $this->artisan('permission:create', [
-            'name' => 'Delete Posts',
-        ])->assertSuccessful();
-
-        $permission = \Whilesmart\Roles\Models\Permission::where('slug', 'delete-posts')->first();
-
-        $this->assertTrue(Str::isUuid($permission->id), "The Permission ID [{$permission->id}] is not a valid UUID.");
     }
 }

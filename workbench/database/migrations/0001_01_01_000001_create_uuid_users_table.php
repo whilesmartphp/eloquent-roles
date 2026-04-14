@@ -8,21 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        $usesUuids = config('roles.uuids', false);
-
-        // 1. Wipe existing Testbench default tables to avoid the conflict
-        Schema::dropIfExists('sessions');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('users');
 
         // 2. Create the table based on the toggle
-        Schema::create('users', function (Blueprint $table) use ($usesUuids) {
-            if ($usesUuids) {
-                $table->uuid('id')->primary();
-            } else {
-                $table->id(); // Default integer
-            }
-
+        Schema::create('uuid_users', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -34,6 +23,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('uuid_users');
     }
 };
