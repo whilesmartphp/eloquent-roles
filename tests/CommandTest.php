@@ -104,17 +104,4 @@ class CommandTest extends TestCase
             ->assertSuccessful();
     }
 
-    // protected function defineDatabaseMigrations(): void
-    // {
-    //     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-    //     $this->loadMigrationsFrom(workbench_path('database/migrations'));
-    // }
-
-    // protected function getPackageProviders($app): array
-    // {
-    //     return [
-    //         \Whilesmart\Roles\RolesServiceProvider::class,
-    //         \Cviebrock\EloquentSluggable\ServiceProvider::class,
-    //     ];
-    // }
 }
