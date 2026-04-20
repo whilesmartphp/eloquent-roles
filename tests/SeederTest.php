@@ -9,8 +9,6 @@ use Whilesmart\Roles\Models\Permission;
 use Whilesmart\Roles\Models\Role;
 use Whilesmart\Roles\Seeders\RolesAndPermissionsSeeder;
 
-use function Orchestra\Testbench\workbench_path;
-
 #[WithMigration]
 class SeederTest extends TestCase
 {
@@ -75,5 +73,4 @@ class SeederTest extends TestCase
         $this->assertEquals(1, Permission::count());
         $this->assertEquals(1, Role::count());
     }
-
 }

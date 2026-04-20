@@ -14,8 +14,6 @@ use Whilesmart\Roles\Models\Permission;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
 
-use function Orchestra\Testbench\workbench_path;
-
 #[WithMigration]
 class MiddlewareTest extends TestCase
 {
@@ -169,5 +167,4 @@ class MiddlewareTest extends TestCase
 
         $this->assertEquals(403, $response->getStatusCode());
     }
-
 }

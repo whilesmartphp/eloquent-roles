@@ -11,8 +11,6 @@ use Workbench\App\Models\Post;
 use Workbench\App\Models\User;
 use Workbench\App\Models\Workspace;
 
-use function Orchestra\Testbench\workbench_path;
-
 #[WithMigration]
 class AbilityTest extends TestCase
 {
@@ -198,5 +196,4 @@ class AbilityTest extends TestCase
         $this->assertFalse($user1->hasAbility('create', Post::class));
         $this->assertTrue($user2->hasAbility('create', Post::class));
     }
-
 }

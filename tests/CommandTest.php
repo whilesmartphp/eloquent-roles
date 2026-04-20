@@ -8,8 +8,6 @@ use Orchestra\Testbench\Attributes\WithMigration;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
 
-use function Orchestra\Testbench\workbench_path;
-
 #[WithMigration]
 class CommandTest extends TestCase
 {
@@ -103,5 +101,4 @@ class CommandTest extends TestCase
             ->expectsOutput("Role 'nonexistent' not found, skipping.")
             ->assertSuccessful();
     }
-
 }
