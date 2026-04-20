@@ -12,11 +12,11 @@ return new class extends Migration
             $table->id();
             $table->string('action');
             if (config('roles.use_uuids')) {
-                $table->uuidMorphs('subject');
+                $table->nullableUuidMorphs('subject');
                 $table->uuidMorphs('assignable');
                 $table->nullableUuidMorphs('context');
             } else {
-                $table->morphs('subject');
+                $table->nullableMorphs('subject');
                 $table->morphs('assignable');
                 $table->nullableMorphs('context');
             }
