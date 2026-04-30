@@ -4,7 +4,6 @@ namespace Whilesmart\Roles\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\Attributes\WithMigration;
-// use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
 

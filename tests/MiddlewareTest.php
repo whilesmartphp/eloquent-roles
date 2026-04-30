@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Orchestra\Testbench\Attributes\WithMigration;
-// use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Middleware\RequirePermission;
 use Whilesmart\Roles\Middleware\RequireRole;
 use Whilesmart\Roles\Models\Permission;

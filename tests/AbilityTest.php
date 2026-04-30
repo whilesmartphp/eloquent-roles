@@ -5,7 +5,6 @@ namespace Whilesmart\Roles\Tests;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\Attributes\WithMigration;
-// use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Models\Ability;
 use Workbench\App\Models\Post;
 use Workbench\App\Models\User;
