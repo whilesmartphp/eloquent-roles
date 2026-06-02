@@ -2,12 +2,15 @@
 
 namespace Whilesmart\Roles\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class RoleAssignment extends Model
 {
+    // use HasUuids;
+
     protected $fillable = [
         'assignable_type',
         'assignable_id',

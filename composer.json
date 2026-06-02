@@ -60,6 +60,7 @@
       "@build",
       "@php vendor/bin/testbench serve --ansi"
     ],
+    "test": "./vendor/bin/testbench package:test",
     "pint": [
       "./vendor/bin/pint"
     ],

@@ -110,7 +110,7 @@ trait HasPermissions
         if ($subject) {
             if (is_object($subject)) {
                 $data['subject_type'] = get_class($subject);
-                $data['subject_id'] = $subject->id ?? null;
+                $data['subject_id'] = $subject->getKey() ?? null;
             } else {
                 $data['subject_type'] = $subject;
             }
