@@ -1,17 +1,18 @@
 <?php
 
-namespace Whilesmart\Roles\Tests;
-
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Orchestra\Testbench\Attributes\WithMigration;
+use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Middleware\RequirePermission;
 use Whilesmart\Roles\Middleware\RequireRole;
 use Whilesmart\Roles\Models\Permission;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
+
+use function Orchestra\Testbench\workbench_path;
 
 #[WithMigration]
 class MiddlewareTest extends TestCase
@@ -165,5 +166,19 @@ class MiddlewareTest extends TestCase
         $response = $middleware->handle($request, fn () => new Response('OK'), 'manage-users', 'delete-users');
 
         $this->assertEquals(403, $response->getStatusCode());
+    }
+
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(workbench_path('database/migrations'));
+    }
+
+    protected function getPackageProviders($app): array
+    {
+        return [
+            \Whilesmart\Roles\RolesServiceProvider::class,
+            \Cviebrock\EloquentSluggable\ServiceProvider::class,
+        ];
     }
 }

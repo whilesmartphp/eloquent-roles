@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/whilesmart/docs-kit/main/schema/docs.schema.json",
+  "name": "Eloquent Roles",
+  "description": "Flexible roles and permissions package for Laravel with contextual role assignment and hierarchical permissions",
+  "icon": "shield",
+  "category": {
+    "language": "php",
+    "framework": "laravel"
+  },
+  "sidebar": [
+    { "title": "Installation", "path": "docs/installation.md" },
+    { "title": "Quick Start", "path": "docs/quick-start.md" },
+    { "title": "Roles", "path": "docs/roles.md" },
+    { "title": "Permissions", "path": "docs/permissions.md" },
+    { "title": "Abilities & Conditions", "path": "docs/abilities.md" },
+    { "title": "Contextual Roles", "path": "docs/contextual-roles.md" },
+    { "title": "Middleware", "path": "docs/middleware.md" },
+    { "title": "Console Commands", "path": "docs/console-commands.md" },
+    { "title": "Configuration", "path": "docs/configuration.md" }
+  ]
+}
