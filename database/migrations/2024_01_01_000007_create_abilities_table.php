@@ -11,15 +11,9 @@ return new class extends Migration
         Schema::create('abilities', function (Blueprint $table) {
             $table->id();
             $table->string('action');
-            if (config('roles.use_uuids')) {
-                $table->nullableUuidMorphs('subject');
-                $table->uuidMorphs('assignable');
-                $table->nullableUuidMorphs('context');
-            } else {
-                $table->nullableMorphs('subject');
-                $table->morphs('assignable');
-                $table->nullableMorphs('context');
-            }
+            $table->nullableMorphs('subject');
+            $table->morphs('assignable');
+            $table->nullableMorphs('context');
             $table->boolean('allowed')->default(true);
             $table->json('conditions')->nullable();
             $table->timestamps();

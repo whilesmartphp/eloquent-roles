@@ -10,17 +10,9 @@ return new class extends Migration
     {
         Schema::create('role_assignments', function (Blueprint $table) {
             $table->id();
+            $table->morphs('assignable');
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
-            if (config('roles.use_uuids')) {
-                $table->uuidMorphs('assignable');
-            } else {
-                $table->morphs('assignable');
-            }
-            if (config('roles.use_uuids')) {
-                $table->nullableUuidMorphs('context');
-            } else {
-                $table->nullableMorphs('context');
-            }
+            $table->nullableMorphs('context');
             $table->timestamps();
 
             $table->unique(
