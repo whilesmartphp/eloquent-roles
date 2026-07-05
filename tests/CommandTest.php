@@ -1,12 +1,11 @@
 <?php
 
+namespace Whilesmart\Roles\Tests;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\Attributes\WithMigration;
-use Orchestra\Testbench\TestCase;
 use Whilesmart\Roles\Models\Role;
 use Workbench\App\Models\User;
-
-use function Orchestra\Testbench\workbench_path;
 
 #[WithMigration]
 class CommandTest extends TestCase
@@ -100,19 +99,5 @@ class CommandTest extends TestCase
         ])
             ->expectsOutput("Role 'nonexistent' not found, skipping.")
             ->assertSuccessful();
-    }
-
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadMigrationsFrom(workbench_path('database/migrations'));
-    }
-
-    protected function getPackageProviders($app): array
-    {
-        return [
-            \Whilesmart\Roles\RolesServiceProvider::class,
-            \Cviebrock\EloquentSluggable\ServiceProvider::class,
-        ];
     }
 }
